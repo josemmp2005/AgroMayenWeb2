@@ -33,7 +33,7 @@ const Loader: React.FC = () => {
             }}
           >
             <img 
-              src="/imgs/agro_logo.png" 
+              src="/imgs/agro_logo.webp" 
               alt="AgroMayen Logo" 
               className="w-32 h-32 drop-shadow-2xl"
             />

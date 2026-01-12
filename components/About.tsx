@@ -19,9 +19,8 @@ const About: React.FC = () => {
               <motion.img 
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
-                src="imgs/naranjas.png" 
+                src="imgs/naranjas.webp" 
                 alt="Nuestras tierras"
-                loading="lazy"
                 className="w-full aspect-[4/5] object-cover"
               />
             </div>

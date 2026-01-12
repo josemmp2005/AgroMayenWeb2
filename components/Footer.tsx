@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="">
-                <img src="imgs/agro_logo.png" alt="AgroMayen Logo" className="w-10 h-10" />
+                <img src="imgs/agro_logo.webp" alt="AgroMayen Logo" className="w-10 h-10" />
               </div>
               <span className="text-2xl font-bold font-comfortaa text-white">
                 Agro<span className="text-brand-lime">Mayen</span>

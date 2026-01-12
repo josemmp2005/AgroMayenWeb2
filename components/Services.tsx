@@ -8,25 +8,25 @@ const serviceData = [
     title: "Asesoramiento de Cultivo",
     description: "Orientación personalizada basada en análisis técnicos para optimizar el rendimiento y salud de tus cosechas.",
     icon: <Sprout className="w-10 h-10 text-brand-dark" />,
-    img: "imgs/service_1.png"
+    img: "imgs/service_1.webp"
   },
   {
     title: "Venta de Fitosanitarios",
     description: "Amplia gama de productos de alta calidad para proteger tus cultivos contra plagas, hongos y enfermedades.",
     icon: <ShieldCheck className="w-10 h-10 text-brand-dark" />,
-    img: "imgs/service_2.png"
+    img: "imgs/service_2.webp"
   },
   {
     title: "Planes de Abonado",
     description: "Diseño de programas de fertilización específicos adaptados a las necesidades del suelo y el tipo de cultivo.",
     icon: <ClipboardCheck className="w-10 h-10 text-brand-dark" />,
-    img: "imgs/service_3.png"
+    img: "imgs/service_3.webp"
   },
   {
     title: "Soluciones Integrales",
     description: "Gestión completa del ciclo del cultivo, desde la siembra hasta la recolección con seguimiento continuo.",
     icon: <ShoppingBag className="w-10 h-10 text-brand-dark" />,
-    img: "imgs/service_4.png"
+    img: "imgs/service_4.webp"
   }
 ];
 

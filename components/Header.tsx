@@ -30,7 +30,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
           <div className="p-2 rounded-lg group-hover:rotate-12 transition-transform ">
-            <img src="imgs/agro_logo.png" alt="AgroMayen Logo"  className="w-10 h-10"/>
+            <img src="imgs/agro_logo.webp" alt="AgroMayen Logo"  className="w-10 h-10"/>
           </div>
           <span className={`text-2xl font-bold font-comfortaa ${isScrolled ? 'text-brand-dark' : 'text-white'}`}>
             Agro<span className="text-brand-lime">Mayen</span>
