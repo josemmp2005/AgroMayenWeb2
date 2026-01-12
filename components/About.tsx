@@ -20,7 +20,8 @@ const About: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
                 src="imgs/naranjas.png" 
-                alt="Nuestras tierras" 
+                alt="Nuestras tierras"
+                loading="lazy"
                 className="w-full aspect-[4/5] object-cover"
               />
             </div>
