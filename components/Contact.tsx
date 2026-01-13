@@ -127,11 +127,11 @@ const Contact: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:w-2/3 rounded-3xl overflow-hidden shadow-xl border border-stone-200 min-h-[450px]"
+            className="lg:w-2/3 rounded-3xl overflow-hidden shadow-xl border border-stone-200 relative h-[450px] lg:h-auto"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.677629921276!2d-5.258046524119801!3d37.703769272003285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12dac5751a838d%3A0x4873456984d44da9!2sAgroquimicos%20Mayen!5e0!3m2!1ses!2ses!4v1743659978730!5m2!1ses!2ses"
-              className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+              className="absolute inset-0 w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
