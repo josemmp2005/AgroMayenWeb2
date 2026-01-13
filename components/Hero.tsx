@@ -13,12 +13,12 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover"
         >
-          <source 
-            src="/videos/pc_video.mp4" 
-            type="video/mp4" 
+          <source
+            src="/videos/pc_video.mp4"
+            type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -35,8 +35,8 @@ const Hero: React.FC = () => {
         >
           Agroquímicos <span className="font-comfortaa">Mayen</span>
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -44,21 +44,21 @@ const Hero: React.FC = () => {
         >
           Especialistas en la salud del cítrico. Cuidamos tu tierra, maximizamos tu producción con soluciones sostenibles.
         </motion.p>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <a 
-            href="#contacto" 
+          <a
+            href="#contacto"
             className="px-8 py-4 bg-brand-lime text-brand-dark rounded-full font-bold text-lg hover:bg-white hover:scale-105 transition-all shadow-xl"
           >
             Contáctanos
           </a>
-          <a 
-            href="#servicios" 
+          <a
+            href="#servicios"
             className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-full font-bold text-lg hover:bg-white/20 transition-all"
           >
             Ver Servicios
@@ -67,13 +67,13 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-10"
       >
-        <a href="#servicios" className="text-brand-lime opacity-80 hover:opacity-100 transition-opacity">
+        <a href="#servicios" aria-label="Desplazarse hacia abajo" className="text-brand-lime opacity-80 hover:opacity-100 transition-opacity">
           <ArrowDown size={32} />
         </a>
       </motion.div>

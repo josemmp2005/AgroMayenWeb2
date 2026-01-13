@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-6">
               <div className="">
-                <img src="imgs/agro_logo.webp" alt="AgroMayen Logo" className="w-10 h-10" />
+                <img src="imgs/agro_logo.webp" alt="AgroMayen Logo" width="40" height="40" className="w-10 h-10" />
               </div>
               <span className="text-2xl font-bold font-comfortaa text-white">
                 Agro<span className="text-brand-lime">Mayen</span>
@@ -38,8 +38,8 @@ const Footer: React.FC = () => {
 
           <div>
             <h4 className="text-white font-bold text-xl mb-6 flex items-center gap-2">
-               <span className="w-1.5 h-6 bg-brand-dark rounded-full border border-brand-lime/30"></span>
-               Legal
+              <span className="w-1.5 h-6 bg-brand-dark rounded-full border border-brand-lime/30"></span>
+              Legal
             </h4>
             <ul className="space-y-4">
               <li><a href="/privacy.html" className="hover:text-brand-lime transition-colors">Privacidad</a></li>

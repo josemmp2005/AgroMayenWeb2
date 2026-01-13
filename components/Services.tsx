@@ -42,8 +42,8 @@ const containerVariants = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.6, ease: "easeOut" }
   }
@@ -53,7 +53,7 @@ const Services: React.FC = () => {
   return (
     <section id="servicios" className="py-24 bg-gradient-to-br from-white via-stone-50 to-lime-50/30 overflow-hidden">
       <div className="container mx-auto px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -67,7 +67,7 @@ const Services: React.FC = () => {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -75,18 +75,20 @@ const Services: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {serviceData.map((service, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               variants={cardVariants}
               whileHover={{ y: -10 }}
               className="group bg-gradient-to-br from-white to-stone-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-stone-200"
             >
               <div className="h-48 overflow-hidden relative">
                 <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
-                <img 
-                  src={service.img} 
+                <img
+                  src={service.img}
                   alt={service.title}
                   loading="lazy"
+                  width="400"
+                  height="300"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </div>

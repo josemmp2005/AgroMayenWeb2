@@ -8,7 +8,7 @@ const About: React.FC = () => {
     <section id="sobre-nosotros" className="py-24 bg-gradient-to-br from-stone-50 via-emerald-50/20 to-lime-50/40 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -16,19 +16,23 @@ const About: React.FC = () => {
             className="lg:w-1/2 relative"
           >
             <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-brand-lime/10">
-              <motion.img 
+              <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
-                src="imgs/naranjas.webp" 
+                src="imgs/naranjas.webp"
                 alt="Nuestras tierras"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="1000"
                 className="w-full aspect-[4/5] object-cover"
               />
             </div>
             {/* Decorative elements using logo colors */}
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-lime rounded-3xl -z-0 opacity-80 shadow-lg"></div>
             <div className="absolute -top-6 -left-6 w-32 h-32 bg-brand-dark rounded-full opacity-20 -z-0"></div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -41,7 +45,7 @@ const About: React.FC = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -63,8 +67,8 @@ const About: React.FC = () => {
                 "Asesoramiento técnico",
                 "Sostenibilidad agrícola"
               ].map((item, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -77,7 +81,7 @@ const About: React.FC = () => {
               ))}
             </div>
 
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-brand-dark to-green-800 text-brand-lime rounded-xl font-bold hover:from-green-800 hover:to-brand-dark transition-all shadow-lg hover:shadow-brand-lime/30"

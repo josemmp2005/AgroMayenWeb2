@@ -14,8 +14,8 @@ const Loader: React.FC = () => {
         <motion.div
           initial={{ scale: 0.5, opacity: 0, rotate: -180 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
-          transition={{ 
-            duration: 1, 
+          transition={{
+            duration: 1,
             ease: "easeOut",
             type: "spring",
             stiffness: 100
@@ -23,22 +23,24 @@ const Loader: React.FC = () => {
           className="relative"
         >
           <motion.div
-            animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
             }}
-            transition={{ 
+            transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           >
-            <img 
-              src="/imgs/agro_logo.webp" 
-              alt="AgroMayen Logo" 
+            <img
+              src="/imgs/agro_logo.webp"
+              alt="AgroMayen Logo"
+              width="128"
+              height="128"
               className="w-32 h-32 drop-shadow-2xl"
             />
           </motion.div>
-          
+
           {/* Glow Effect */}
           <motion.div
             className="absolute inset-0 bg-brand-lime rounded-full blur-3xl opacity-30"

@@ -26,7 +26,7 @@ const Contact: React.FC = () => {
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
-    
+
     if (!formData.nombre.trim()) {
       newErrors.nombre = 'El nombre es obligatorio';
     }
@@ -64,7 +64,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contacto" className="py-24 bg-gradient-to-br from-white via-lime-50/20 to-emerald-50/30">
       <div className="container mx-auto px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -79,32 +79,32 @@ const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
           {[
-            { 
-              href: "tel:+34673263990", 
-              icon: <Phone className="w-8 h-8 text-brand-dark group-hover:text-white" />, 
-              title: "Llámanos", 
-              val: "+34 673 26 39 90", 
+            {
+              href: "tel:+34673263990",
+              icon: <Phone className="w-8 h-8 text-brand-dark group-hover:text-white" />,
+              title: "Llámanos",
+              val: "+34 673 26 39 90",
               color: "bg-gradient-to-br from-white to-stone-50 hover:from-brand-dark hover:via-green-800 hover:to-brand-dark hover:scale-105 border-stone-200 hover:border-brand-lime",
               iconBg: "bg-stone-100 group-hover:bg-emerald-600 shadow-md"
             },
-            { 
-              href: "mailto:info.agromayen@gmail.com", 
-              icon: <Mail className="w-8 h-8 text-brand-lime group-hover:text-white" />, 
-              title: "Escríbenos", 
-              val: "info.agromayen@gmail.com", 
+            {
+              href: "mailto:info.agromayen@gmail.com",
+              icon: <Mail className="w-8 h-8 text-brand-lime group-hover:text-white" />,
+              title: "Escríbenos",
+              val: "info.agromayen@gmail.com",
               color: "bg-gradient-to-br from-white to-lime-50 hover:from-brand-lime hover:via-lime-400 hover:to-green-400 hover:scale-105 border-stone-200 hover:border-brand-lime",
               iconBg: "bg-lime-50 group-hover:bg-green-700 shadow-md"
             },
-            { 
-              href: "#ubicacion", 
-              icon: <MapPin className="w-8 h-8 text-brand-dark group-hover:text-white" />, 
-              title: "Visítanos", 
-              val: "Pol. Garrotal, Palma del Río", 
+            {
+              href: "#ubicacion",
+              icon: <MapPin className="w-8 h-8 text-brand-dark group-hover:text-white" />,
+              title: "Visítanos",
+              val: "Pol. Garrotal, Palma del Río",
               color: "bg-gradient-to-br from-white to-emerald-50 hover:from-emerald-700 hover:via-brand-dark hover:to-stone-800 hover:scale-105 border-stone-200 hover:border-emerald-500",
               iconBg: "bg-stone-100 group-hover:bg-brand-dark shadow-md"
             }
           ].map((item, idx) => (
-            <motion.a 
+            <motion.a
               key={idx}
               href={item.href}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -123,22 +123,23 @@ const Contact: React.FC = () => {
         </div>
 
         <div id="ubicacion" className="flex flex-col lg:flex-row gap-8 items-stretch">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="lg:w-2/3 rounded-3xl overflow-hidden shadow-xl border border-stone-200 min-h-[450px]"
           >
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.677629921276!2d-5.258046524119801!3d37.703769272003285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12dac5751a838d%3A0x4873456984d44da9!2sAgroquimicos%20Mayen!5e0!3m2!1ses!2ses!4v1743659978730!5m2!1ses!2ses" 
-              className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700" 
-              allowFullScreen={true} 
-              loading="lazy" 
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.677629921276!2d-5.258046524119801!3d37.703769272003285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd12dac5751a838d%3A0x4873456984d44da9!2sAgroquimicos%20Mayen!5e0!3m2!1ses!2ses!4v1743659978730!5m2!1ses!2ses"
+              className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+              allowFullScreen={true}
+              loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              title="Ubicación de Agroquímicos Mayen en Google Maps"
             ></iframe>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -148,7 +149,7 @@ const Contact: React.FC = () => {
               <h3 className="text-2xl font-bold text-brand-dark mb-6">Envíanos un mensaje</h3>
               <AnimatePresence mode="wait">
                 {isSubmitted ? (
-                  <motion.div 
+                  <motion.div
                     key="success"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -160,50 +161,50 @@ const Contact: React.FC = () => {
                     <p className="text-slate-600 text-sm">Gracias por contactar con AgroMayen. Te responderemos lo antes posible.</p>
                   </motion.div>
                 ) : (
-                  <motion.form 
+                  <motion.form
                     key="form"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="space-y-4" 
-                    onSubmit={handleSubmit} 
+                    className="space-y-4"
+                    onSubmit={handleSubmit}
                     noValidate
                   >
                     <div>
                       <label className="block text-sm font-semibold text-brand-dark mb-1">Nombre</label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${errors.nombre ? 'border-red-500 focus:ring-red-200' : 'border-stone-300 focus:ring-brand-lime'} focus:ring-2 focus:outline-none transition-all bg-white`} 
-                        placeholder="Tu nombre" 
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.nombre ? 'border-red-500 focus:ring-red-200' : 'border-stone-300 focus:ring-brand-lime'} focus:ring-2 focus:outline-none transition-all bg-white`}
+                        placeholder="Tu nombre"
                       />
                       {errors.nombre && <p className="text-red-500 text-xs mt-1 font-medium">{errors.nombre}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-brand-dark mb-1">Email</label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-stone-300 focus:ring-brand-lime'} focus:ring-2 focus:outline-none transition-all bg-white`} 
-                        placeholder="correo@ejemplo.com" 
+                        className={`w-full px-4 py-3 rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-stone-300 focus:ring-brand-lime'} focus:ring-2 focus:outline-none transition-all bg-white`}
+                        placeholder="correo@ejemplo.com"
                       />
                       {errors.email && <p className="text-red-500 text-xs mt-1 font-medium">{errors.email}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-brand-dark mb-1">Mensaje</label>
-                      <textarea 
+                      <textarea
                         name="mensaje"
                         value={formData.mensaje}
                         onChange={handleChange}
-                        rows={4} 
-                        className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-lime focus:outline-none transition-all resize-none bg-white" 
+                        rows={4}
+                        className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-brand-lime focus:outline-none transition-all resize-none bg-white"
                         placeholder="¿En qué podemos ayudarte?"
                       ></textarea>
                     </div>
-                    <motion.button 
+                    <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
