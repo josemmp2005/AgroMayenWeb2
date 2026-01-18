@@ -1,102 +1,95 @@
 import { Handler } from "@netlify/functions";
-import { Client } from "pg";
+import { google } from "googleapis";
 
-const handler: Handler = async (event, context) => {
+const handler: Handler = async (event) => {
     // CORS headers
     const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+        'Access-Control-Allow-Methods': 'GET, OPTIONS'
     };
 
     if (event.httpMethod === 'OPTIONS') {
         return { statusCode: 200, headers, body: '' };
     }
 
-    const client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: { rejectUnauthorized: false }
-    });
-
-    try {
-        await client.connect();
-
-        const { httpMethod, body } = event;
-        const user = context.clientContext?.user; // Netlify Identity user
-
-        // GET: Fetch all sheets
-        if (httpMethod === 'GET') {
-            const result = await client.query('SELECT * FROM technical_sheets ORDER BY created_at DESC');
-            await client.end();
-            return {
-                statusCode: 200,
-                headers,
-                body: JSON.stringify(result.rows),
-            };
-        }
-
-        // AUTH CHECK for non-GET methods
-        // Note: locally context.clientContext.user might be missing without netlify dev
-        // For now we assume if header is present we trust (or verify properly if production)
-        // But Netlify Functions + Identity automatically validates the token if sent in Authorization header
-        // and populates context.clientContext.user
-        if (!user) {
-            await client.end();
-            return { statusCode: 401, headers, body: "Unauthorized" };
-        }
-
-        // POST: Create sheet
-        if (httpMethod === 'POST' && body) {
-            const { name, url } = JSON.parse(body);
-            const result = await client.query(
-                'INSERT INTO technical_sheets (name, url) VALUES ($1, $2) RETURNING *',
-                [name, url]
-            );
-            await client.end();
-            return {
-                statusCode: 201,
-                headers,
-                body: JSON.stringify(result.rows[0]),
-            };
-        }
-
-        // PUT: Update sheet
-        if (httpMethod === 'PUT' && body) {
-            const { id, name, url } = JSON.parse(body);
-            const result = await client.query(
-                'UPDATE technical_sheets SET name = $1, url = $2 WHERE id = $3 RETURNING *',
-                [name, url, id]
-            );
-            await client.end();
-            return {
-                statusCode: 200,
-                headers,
-                body: JSON.stringify(result.rows[0]),
-            };
-        }
-
-        // DELETE: Delete sheet
-        if (httpMethod === 'DELETE' && body) {
-            const { id } = JSON.parse(body);
-            await client.query('DELETE FROM technical_sheets WHERE id = $1', [id]);
-            await client.end();
-            return {
-                statusCode: 200,
-                headers,
-                body: JSON.stringify({ message: "Deleted" }),
-            };
-        }
-
-        await client.end();
+    if (event.httpMethod !== 'GET') {
         return { statusCode: 405, headers, body: "Method Not Allowed" };
+    }
 
-    } catch (error) {
-        console.error('Database Error:', error);
-        await client.end();
+    // --- GOOGLE DRIVE INTEGRATION ---
+    const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+    let rawKey = process.env.GOOGLE_PRIVATE_KEY;
+    const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+
+    if (!email || !rawKey || !folderId) {
+        console.warn("Google Drive credentials or Folder ID missing in ENV.");
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: "Database connection failed", details: error.toString() }),
+            body: JSON.stringify({ error: "Configuration Error" })
+        };
+    }
+
+    let finalKey = rawKey.trim();
+
+    // Robust parsing for common .env quote issues and JSON pasted into the key variable
+    while (finalKey.startsWith('"') || finalKey.startsWith("'")) {
+        finalKey = finalKey.substring(1).trim();
+    }
+    while (finalKey.endsWith('"') || finalKey.endsWith("'")) {
+        finalKey = finalKey.substring(0, finalKey.length - 1).trim();
+    }
+
+    if (finalKey.startsWith('{')) {
+        try {
+            const json = JSON.parse(finalKey);
+            if (json.private_key) {
+                finalKey = json.private_key;
+            }
+        } catch (e) {
+            // Not JSON or parse failed, use as is
+        }
+    }
+
+    const formattedKey = finalKey.replace(/\\n/g, '\n');
+
+    try {
+        const auth = new google.auth.JWT({
+            email,
+            key: formattedKey,
+            scopes: ['https://www.googleapis.com/auth/drive.readonly']
+        });
+
+        await auth.authorize();
+        const drive = google.drive({ version: 'v3', auth });
+
+        const response = await drive.files.list({
+            q: `'${folderId}' in parents and trashed = false and mimeType = 'application/pdf'`,
+            fields: 'files(id, name, webContentLink, webViewLink, createdTime)',
+            orderBy: 'name'
+        });
+
+        const driveSheets = (response.data.files || []).map((file, index) => ({
+            id: `drive-${file.id || index}`,
+            name: (file.name || "Sin nombre").replace(/\.[^/.]+$/, ""), // Remove .pdf extension
+            url: file.webViewLink || file.webContentLink,
+            date: file.createdTime ? file.createdTime.split('T')[0] : new Date().toISOString().split('T')[0],
+            source: 'drive'
+        }));
+
+        return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify(driveSheets),
+        };
+
+    } catch (error) {
+        console.error("Critical Google Drive Error:", error.message || error);
+        return {
+            statusCode: 500,
+            headers,
+            body: JSON.stringify({ error: "Operation failed", details: error.toString() }),
         };
     }
 };
