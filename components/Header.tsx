@@ -19,6 +19,7 @@ const Header: React.FC = () => {
     { name: 'Sobre Nosotros', href: '#sobre-nosotros' },
     { name: 'Contacto', href: '#contacto' },
     { name: 'Ubicación', href: '#ubicacion' },
+    { name: 'Fichas', href: '/fichas-tecnicas' },
   ];
 
   return (

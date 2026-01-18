@@ -33,6 +33,7 @@ const Footer: React.FC = () => {
               <li><a href="#sobre-nosotros" className="hover:text-brand-lime transition-colors">Sobre Nosotros</a></li>
               <li><a href="#contacto" className="hover:text-brand-lime transition-colors">Contacto</a></li>
               <li><a href="#ubicacion" className="hover:text-brand-lime transition-colors">Ubicación</a></li>
+              <li><a href="/fichas-tecnicas" className="hover:text-brand-lime transition-colors font-medium text-brand-lime">Fichas Técnicas</a></li>
             </ul>
           </div>
 
@@ -42,9 +43,9 @@ const Footer: React.FC = () => {
               Legal
             </h4>
             <ul className="space-y-4">
-              <li><a href="/privacy.html" className="hover:text-brand-lime transition-colors">Privacidad</a></li>
-              <li><a href="/legal-notice.html" className="hover:text-brand-lime transition-colors">Aviso Legal</a></li>
-              <li><a href="/cookies.html" className="hover:text-brand-lime transition-colors">Cookies</a></li>
+              <li><a href="/privacidad" className="hover:text-brand-lime transition-colors">Privacidad</a></li>
+              <li><a href="/aviso-legal" className="hover:text-brand-lime transition-colors">Aviso Legal</a></li>
+              <li><a href="/cookies" className="hover:text-brand-lime transition-colors">Cookies</a></li>
             </ul>
           </div>
         </div>

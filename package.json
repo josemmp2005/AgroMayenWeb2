@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/netlify-identity-widget": "^1.9.7",
     "framer-motion": "^12.26.1",
     "lucide-react": "^0.562.0",
+    "netlify-identity-widget": "^1.9.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.12.0"

@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import About from './components/About';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from './components/Loader';
+import Home from './pages/Home';
+import Privacy from './pages/Privacy';
+import Cookies from './pages/Cookies';
+import LegalNotice from './pages/LegalNotice';
+import TechnicalSheets from './pages/TechnicalSheets';
+import AdminLogin from './pages/AdminLogin';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ const App: React.FC = () => {
     const video = document.createElement('video');
     video.src = '/videos/pc_video.mp4';
     video.preload = 'metadata';
-    
+
     video.addEventListener('loadedmetadata', () => {
       videoLoaded = true;
       checkAllLoaded();
@@ -82,17 +83,19 @@ const App: React.FC = () => {
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" />}
       </AnimatePresence>
-      
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow">
-          <Hero />
-          <Services />
-          <About />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+
+      {!loading && (
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/privacidad" element={<Privacy />} />
+            <Route path="/cookies" element={<Cookies />} />
+            <Route path="/aviso-legal" element={<LegalNotice />} />
+            <Route path="/fichas-tecnicas" element={<TechnicalSheets />} />
+            <Route path="/gestion-empleados" element={<AdminLogin />} />
+          </Routes>
+        </Router>
+      )}
     </>
   );
 };
