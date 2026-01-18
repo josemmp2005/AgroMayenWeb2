@@ -1,14 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Loader from './components/Loader';
-import Home from './pages/Home';
-import Privacy from './pages/Privacy';
-import Cookies from './pages/Cookies';
-import LegalNotice from './pages/LegalNotice';
-import TechnicalSheets from './pages/TechnicalSheets';
-import AdminLogin from './pages/AdminLogin';
+
+// Lazy load pages for performance (Code Splitting)
+const Home = lazy(() => import('./pages/Home'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Cookies = lazy(() => import('./pages/Cookies'));
+const LegalNotice = lazy(() => import('./pages/LegalNotice'));
+const TechnicalSheets = lazy(() => import('./pages/TechnicalSheets'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -86,14 +88,16 @@ const App: React.FC = () => {
 
       {!loading && (
         <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/privacidad" element={<Privacy />} />
-            <Route path="/cookies" element={<Cookies />} />
-            <Route path="/aviso-legal" element={<LegalNotice />} />
-            <Route path="/fichas-tecnicas" element={<TechnicalSheets />} />
-            <Route path="/gestion-empleados" element={<AdminLogin />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen bg-slate-50" />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/privacidad" element={<Privacy />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="/aviso-legal" element={<LegalNotice />} />
+              <Route path="/fichas-tecnicas" element={<TechnicalSheets />} />
+              <Route path="/gestion-empleados" element={<AdminLogin />} />
+            </Routes>
+          </Suspense>
         </Router>
       )}
     </>
