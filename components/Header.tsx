@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     { name: 'Sobre Nosotros', href: '#sobre-nosotros' },
     { name: 'Contacto', href: '#contacto' },
     { name: 'Ubicación', href: '#ubicacion' },
-    { name: 'Fichas', href: '/fichas-tecnicas' },
+    { name: 'Fichas Técnicas', href: '/fichas-tecnicas' },
   ];
 
   return (
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8">
+        <nav className="hidden lg:flex gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -53,7 +53,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button
-          className={`md:hidden p-2 rounded-lg ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
+          className={`lg:hidden p-2 rounded-lg ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X /> : <Menu />}
@@ -61,7 +61,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white z-[60] transition-transform duration-300 md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      <div className={`fixed inset-0 bg-white z-[60] transition-transform duration-300 lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
         <div className="flex flex-col items-center justify-center w-full h-screen gap-8 bg-white text-center">
           <button
