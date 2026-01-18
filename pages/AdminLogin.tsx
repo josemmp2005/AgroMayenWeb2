@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { initAuth, login, logout, currentUser, onLogin, onLogout } from '../lib/auth';
+import { initAuth, login, logout, currentUser, onLogin, onLogout, close } from '../lib/auth';
 import { Shield, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,15 +8,19 @@ const AdminLogin: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Debug alert to confirm mount
-        // alert('AdminLogin Mounted'); 
-        console.log('AdminLogin Mounted');
+        // Debug
+        // console.log('AdminLogin Mounted');
 
         initAuth();
         onLogin((user: any) => {
             console.log('Login callback fired', user);
             setUser(user);
-            navigate('/fichas-tecnicas');
+
+            // Wait a moment for widget animation/state to complete, then close and navigate
+            setTimeout(() => {
+                close();
+                navigate('/fichas-tecnicas');
+            }, 500);
         });
         onLogout(() => {
             setUser(null);
@@ -24,7 +28,7 @@ const AdminLogin: React.FC = () => {
 
         // Auto-open login if not authenticated
         if (!currentUser()) {
-            // login(); // Removing auto-login for now to let user click button manually for testing
+            // login(); 
         }
     }, [navigate]);
 
@@ -43,7 +47,6 @@ const AdminLogin: React.FC = () => {
                 {!user ? (
                     <button
                         onClick={() => {
-                            alert('Boton pulsado - Intentando abrir widget'); // Explicit feedback for user
                             console.log('Login button clicked');
                             login();
                         }}

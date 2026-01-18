@@ -5,14 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "netlify dev",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@types/netlify-identity-widget": "^1.9.7",
+    "@types/pg": "^8.16.0",
     "framer-motion": "^12.26.1",
     "lucide-react": "^0.562.0",
     "netlify-identity-widget": "^1.9.2",
+    "pg": "^8.17.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router-dom": "^7.12.0"
@@ -20,6 +23,7 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "netlify-cli": "^23.13.4",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

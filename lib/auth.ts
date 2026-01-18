@@ -25,6 +25,10 @@ export const logout = () => {
     netlifyIdentity.logout();
 };
 
+export const close = () => {
+    netlifyIdentity.close();
+};
+
 export const currentUser = () => {
     return netlifyIdentity.currentUser();
 }
