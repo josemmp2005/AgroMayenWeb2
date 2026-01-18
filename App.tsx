@@ -10,7 +10,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const LegalNotice = lazy(() => import('./pages/LegalNotice'));
 const TechnicalSheets = lazy(() => import('./pages/TechnicalSheets'));
-const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -95,7 +95,7 @@ const App: React.FC = () => {
               <Route path="/cookies" element={<Cookies />} />
               <Route path="/aviso-legal" element={<LegalNotice />} />
               <Route path="/fichas-tecnicas" element={<TechnicalSheets />} />
-              <Route path="/gestion-empleados" element={<AdminLogin />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </Router>
