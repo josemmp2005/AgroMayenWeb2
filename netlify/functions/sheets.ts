@@ -1,6 +1,11 @@
 import { Handler } from "@netlify/functions";
 import { google } from "googleapis";
 
+// --- SIMPLE IN-MEMORY CACHE ---
+let cache: any = null;
+let cacheTimestamp: number = 0;
+const CACHE_DURATION = 1000 * 60 * 2; // 2 minutes
+
 const handler: Handler = async (event) => {
     // CORS headers
     const headers = {
@@ -15,6 +20,16 @@ const handler: Handler = async (event) => {
 
     if (event.httpMethod !== 'GET') {
         return { statusCode: 405, headers, body: "Method Not Allowed" };
+    }
+
+    // Check Cache
+    const now = Date.now();
+    if (cache && (now - cacheTimestamp) < CACHE_DURATION) {
+        return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify(cache),
+        };
     }
 
     // --- GOOGLE DRIVE INTEGRATION ---
@@ -78,6 +93,10 @@ const handler: Handler = async (event) => {
             date: file.createdTime ? file.createdTime.split('T')[0] : new Date().toISOString().split('T')[0],
             source: 'drive'
         }));
+
+        // Update Cache
+        cache = driveSheets;
+        cacheTimestamp = Date.now();
 
         return {
             statusCode: 200,

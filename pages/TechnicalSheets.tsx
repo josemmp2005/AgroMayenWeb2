@@ -15,6 +15,7 @@ const TechnicalSheets: React.FC = () => {
     const [sheets, setSheets] = useState<Sheet[]>([]);
     const [filteredSheets, setFilteredSheets] = useState<Sheet[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -22,12 +23,19 @@ const TechnicalSheets: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
+
+    useEffect(() => {
         setFilteredSheets(
             sheets.filter(sheet =>
-                sheet.name.toLowerCase().includes(searchTerm.toLowerCase())
+                sheet.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
             )
         );
-    }, [searchTerm, sheets]);
+    }, [debouncedSearchTerm, sheets]);
 
     const fetchSheets = async () => {
         setIsLoading(true);
@@ -106,10 +114,10 @@ const TechnicalSheets: React.FC = () => {
                             {filteredSheets.map((sheet, index) => (
                                 <motion.div
                                     key={sheet.id}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ delay: index * 0.05 }}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
                                     layout
                                     className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition-shadow group relative overflow-hidden"
                                 >
