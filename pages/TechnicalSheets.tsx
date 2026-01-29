@@ -65,7 +65,7 @@ const TechnicalSheets: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-dark to-brand-lime bg-clip-text text-transparent mb-4"
                     >
-                        Fichas Técnicas
+                        Fichas de Seguridad
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
@@ -139,9 +139,13 @@ const TechnicalSheets: React.FC = () => {
                         </AnimatePresence>
 
                         {filteredSheets.length === 0 && (
-                            <div className="col-span-full text-center py-20 text-slate-400">
-                                <FileText size={48} className="mx-auto mb-4 opacity-50" />
-                                <p>No se encontraron fichas que coincidan con tu búsqueda.</p>
+                            <div className="col-span-full text-center py-20 bg-white/50 backdrop-blur-sm rounded-3xl border border-slate-100 shadow-sm">
+                                <Search size={48} className="mx-auto mb-4 text-slate-300" />
+                                <h3 className="text-xl font-bold text-slate-700 mb-2">No se han encontrado resultados</h3>
+                                <p className="text-slate-500 max-w-sm mx-auto">
+                                    No hemos podido encontrar ninguna ficha que coincida con "{searchTerm}".
+                                    Intenta con otros términos o revisa la ortografía.
+                                </p>
                             </div>
                         )}
                     </div>
