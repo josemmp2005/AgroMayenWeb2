@@ -94,7 +94,7 @@ const App: React.FC = () => {
               <Route path="/privacidad" element={<Privacy />} />
               <Route path="/cookies" element={<Cookies />} />
               <Route path="/aviso-legal" element={<LegalNotice />} />
-              <Route path="/fichas-tecnicas" element={<TechnicalSheets />} />
+              <Route path="/fichas-seguridad" element={<TechnicalSheets />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

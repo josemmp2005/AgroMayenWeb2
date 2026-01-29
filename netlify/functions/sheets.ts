@@ -67,7 +67,8 @@ const handler: Handler = async (event) => {
         const response = await drive.files.list({
             q: `'${folderId}' in parents and trashed = false and mimeType = 'application/pdf'`,
             fields: 'files(id, name, webContentLink, webViewLink, createdTime)',
-            orderBy: 'name'
+            orderBy: 'name',
+            pageSize: 1000
         });
 
         const driveSheets = (response.data.files || []).map((file, index) => ({

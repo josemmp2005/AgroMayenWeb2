@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-4xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-2xl bg-gradient-to-r from-emerald-200 via-lime-300 to-brand-lime bg-clip-text text-transparent"
         >
-          Agroquímicos <span className="font-comfortaa">Mayen</span>
+          <span className="font-comfortaa">Agroquímicos Mayen</span>
         </motion.h1>
 
         <motion.p

@@ -11,15 +11,14 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@types/netlify-identity-widget@^1.9.7",
         "npm:@types/node@^22.14.0",
-        "npm:@types/pg@^8.16.0",
+        "npm:@types/react-dom@^19.0.3",
+        "npm:@types/react@^19.0.8",
         "npm:@vitejs/plugin-react@5",
         "npm:framer-motion@^12.26.1",
+        "npm:googleapis@^170.1.0",
         "npm:lucide-react@0.562",
         "npm:netlify-cli@^23.13.4",
-        "npm:netlify-identity-widget@^1.9.2",
-        "npm:pg@^8.17.1",
         "npm:react-dom@^19.2.3",
         "npm:react-router-dom@^7.12.0",
         "npm:react@^19.2.3",
