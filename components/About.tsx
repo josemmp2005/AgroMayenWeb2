@@ -1,94 +1,99 @@
-
 import React from 'react';
-import { CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
+import { Quote, ArrowRight, Leaf, Shield, Award, Truck } from 'lucide-react';
 
 const About: React.FC = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const features = [
+    { icon: <Leaf size={20} />, title: 'Sostenibilidad certificada' },
+    { icon: <Shield size={20} />, title: 'Asesoramiento acreditado' },
+    { icon: <Award size={20} />, title: 'Trazabilidad y Calidad' },
+    { icon: <Truck size={20} />, title: 'Distribución ágil' }
+  ];
+
   return (
-    <section id="sobre-nosotros" className="py-24 bg-gradient-to-br from-stone-50 via-emerald-50/20 to-lime-50/40 overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:w-1/2 relative"
+    <section id="nosotros" className="bg-[#f8f7f2] py-24 overflow-hidden border-b border-stone-200/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center" ref={ref}>
+          
+          {/* Left Column: Image Area */}
+          <motion.div 
+            className="lg:w-1/2 relative w-full max-w-lg mx-auto lg:max-w-none"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-2 border-brand-lime/10">
-              <motion.img
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5 }}
-                src="imgs/naranjas.webp"
-                alt="Nuestras tierras"
-                loading="lazy"
-                decoding="async"
-                width="800"
-                height="1000"
-                className="w-full aspect-[4/5] object-cover"
+            {/* Main Image */}
+            <div className="rounded-3xl overflow-hidden shadow-lg border border-stone-200/60 relative">
+              <img 
+                src="/imgs/naranjas.webp" 
+                alt="Cultivo de naranjas" 
+                className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
               />
             </div>
-            {/* Decorative elements using logo colors */}
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-lime rounded-3xl -z-0 opacity-80 shadow-lg"></div>
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-brand-dark rounded-full opacity-20 -z-0"></div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="absolute bottom-10 left-10 glass p-6 rounded-2xl z-20 shadow-xl border-l-4 border-brand-dark max-w-xs hidden md:block"
+            {/* Solid quote card */}
+            <motion.div 
+              className="absolute -bottom-6 -right-6 lg:-right-10 bg-white border border-stone-200 shadow-xl rounded-2xl p-6 max-w-[280px] overflow-hidden"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <p className="text-brand-dark font-bold italic">
-                "Cuidar la naranja es el compromiso que nos define."
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-brand-dark"></div>
+              <Quote className="text-brand-leaf w-5 h-5 mb-3" />
+              <p className="text-brand-dark font-medium italic text-sm leading-relaxed">
+                "Comprometidos con la agricultura integrada y el respeto al entorno rural"
               </p>
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          {/* Right Column: Text Content */}
+          <motion.div 
             className="lg:w-1/2"
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-brand-dark via-green-600 to-emerald-500 bg-clip-text text-transparent">Quiénes Somos</h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              Somos una empresa especializada en fitosanitarios, dedicada apasionadamente al cuidado y protección de cultivos, con un enfoque prioritario en la naranja.
+            <p className="text-brand-leaf uppercase tracking-widest text-xs font-bold mb-3">
+              Sobre Nosotros
             </p>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Desde nuestros inicios, trabajamos mano a mano con agricultores para ofrecer soluciones efectivas y sostenibles que mejoren la salud de sus naranjos y la calidad de su producción.
+            <h2 className="text-4xl lg:text-5xl font-bold text-brand-dark leading-tight mb-6 font-outfit tracking-tight">
+              Más de 15 años al servicio del agricultor
+            </h2>
+            <p className="text-warm-gray leading-relaxed text-base mb-10 font-dm">
+              En AgroMayen combinamos experiencia técnica y un catálogo especializado en sanidad vegetal para ofrecer soluciones adaptadas a cada finca. Nuestro equipo de ingenieros técnicos agrícolas trabaja directamente sobre el terreno para garantizar la máxima rentabilidad y salud de sus cultivos.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-              {[
-                "Atención personalizada",
-                "Calidad certificada",
-                "Asesoramiento técnico",
-                "Sostenibilidad agrícola"
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 * i }}
-                  className="flex items-center gap-3 text-slate-700 font-medium p-3 bg-white rounded-xl shadow-sm border-l-4 border-brand-lime"
+            {/* Feature Grid */}
+            <div className="grid grid-cols-2 gap-6 mb-10">
+              {features.map((feature, idx) => (
+                <div 
+                  key={idx} 
+                  className="flex items-center gap-3"
                 >
-                  <CheckCircle2 className="text-brand-dark w-5 h-5 flex-shrink-0" />
-                  {item}
-                </motion.div>
+                  <div className="w-10 h-10 bg-white border border-stone-200 text-brand-dark rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm">
+                    {feature.icon}
+                  </div>
+                  <span className="font-bold text-brand-dark text-sm tracking-tight">
+                    {feature.title}
+                  </span>
+                </div>
               ))}
             </div>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-brand-dark to-green-800 text-brand-lime rounded-xl font-bold hover:from-green-800 hover:to-brand-dark transition-all shadow-lg hover:shadow-brand-lime/30"
+            <button 
+              onClick={() => {
+                const el = document.getElementById('contacto');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-flex items-center gap-2 bg-brand-dark text-white px-8 py-4 rounded-xl font-bold hover:bg-brand-forest transition-colors duration-300 active:scale-[0.98]"
             >
-              Conoce nuestra historia
-            </motion.button>
+              Contactar con nosotros <ArrowRight size={20} />
+            </button>
           </motion.div>
+
         </div>
       </div>
     </section>
