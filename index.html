@@ -1,63 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/webp" href="imgs/agro_logo.webp" />
-
+    <link rel="icon" type="image/webp" href="/imgs/agro_logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AgroMayen: Especialistas en fitosanitarios y salud del cítrico en Palma del Río. Maximizamos tu producción con soluciones sostenibles." />
-    <title>AgroMayen | Cuidamos tu tierra</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AgroMayen — Soluciones Fitosanitarias</title>
+    <meta name="description" content="Expertos en soluciones fitosanitarias para la agricultura moderna. Asesoramiento, productos y servicio de calidad." />
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Outfit:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#4b5d1c', // Forest/Olive from the hand
-                            lime: '#a5ef00', // Bright lime from the leaf
-                        }
-                    }
-                }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-dark': '#4b5d1c',
+              'brand-lime': '#a5ef00',
+              'brand-forest': '#3a4a16',
+              'brand-leaf': '#7cb518',
+              'cream': '#f8f7f2',
+              'warm-gray': '#6b6b60'
+            },
+            fontFamily: {
+              outfit: ['Outfit', 'sans-serif'],
+              dm: ['DM Sans', 'sans-serif'],
+              comfortaa: ['Comfortaa', 'cursive'],
             }
+          }
         }
+      }
     </script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        h1,
-        h2,
-        h3,
-        .font-comfortaa {
-            font-family: 'Comfortaa', cursive;
-        }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .text-shadow-lg {
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-    </style>
-    <script type="importmap">
-        { "imports": { "react/": "https://esm.sh/react@^19.2.3/", "react": "https://esm.sh/react@^19.2.3", "lucide-react": "https://esm.sh/lucide-react@^0.562.0", "react-dom/": "https://esm.sh/react-dom@^19.2.3/" } }
-    </script>
-</head>
 
-<body class="bg-stone-50 text-slate-900">
+    <style>
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #f8f7f2;
+        color: #4b5d1c;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Outfit', sans-serif;
+      }
+      .font-comfortaa {
+        font-family: 'Comfortaa', cursive;
+      }
+      
+      /* Premium Container Styles */
+      .card-light {
+        background-color: #ffffff;
+        border: 1px solid #e5e5e0;
+        box-shadow: 0 4px 20px -2px rgba(75, 93, 28, 0.05);
+      }
+      .card-dark {
+        background-color: #3a4a16;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      
+      /* Subtle text utilities */
+      .gradient-text {
+        background: linear-gradient(135deg, #7cb518, #4b5d1c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f8f7f2; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4b5d1c; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3a4a16; 
+      }
+
+      /* Selection */
+      ::selection {
+        background-color: #a5ef00;
+        color: #4b5d1c;
+      }
+    </style>
+  </head>
+  <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
-</body>
-
+  </body>
 </html>
