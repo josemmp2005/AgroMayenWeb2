@@ -147,7 +147,7 @@ const Contact: React.FC = () => {
               <div className="flex flex-col pt-0.5">
                 <span className="font-bold text-brand-dark text-sm tracking-tight mb-1">Dirección</span>
                 <span className="text-warm-gray text-sm font-dm font-medium leading-relaxed">
-                  Calle de L'Alcúdia, 29, 46190,<br/>Riba-roja de Túria, Valencia
+                   Pol. Garrotal C/ F-Mandarina N° 3-A, 14700 Palma del Río, Córdoba
                 </span>
               </div>
             </div>
