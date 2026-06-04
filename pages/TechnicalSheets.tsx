@@ -16,6 +16,7 @@ const TechnicalSheets: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [selected, setSelected] = useState<Sheet | null>(null);
 
     const filteredSheets = useMemo(() => {
         const query = debouncedSearchTerm.trim().toLowerCase();
@@ -151,7 +152,6 @@ const TechnicalSheets: React.FC = () => {
  
                                     <div className="flex justify-between items-start mb-4 pl-3">
                                         <div className="p-3 bg-slate-50 border border-stone-200/60 rounded-xl text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
-                                            <FileText size={24} />
                                         </div>
                                     </div>
  
