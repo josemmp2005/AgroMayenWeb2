@@ -1,76 +1,67 @@
-
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Home, ArrowLeft, Leaf } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Home as HomeIcon, Leaf } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const NotFound: React.FC = () => {
-    return (
-        <div className="min-h-screen bg-stone-50 flex flex-col pt-20">
-            <Header />
+  return (
+    <div className="min-h-screen flex flex-col bg-[#f8f7f2]">
+      <Header />
+      
+      <main className="flex-grow flex items-center justify-center relative overflow-hidden px-6 py-32">
+        {/* Decorative Leaves */}
+        <Leaf className="absolute top-1/4 left-1/4 text-brand-lime/10 w-32 h-32 -rotate-12" />
+        <Leaf className="absolute bottom-1/4 right-1/4 text-brand-dark/5 w-48 h-48 rotate-45" />
+        <Leaf className="absolute top-1/2 right-1/3 text-brand-leaf/10 w-24 h-24 rotate-90" />
 
-            <main className="flex-grow flex items-center justify-center p-6 bg-stone-50 relative overflow-hidden">
-                {/* Subtle background decoration */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-5">
-                    <Leaf className="w-96 h-96 absolute top-10 right-10 rotate-12" />
-                    <Leaf className="w-64 h-64 absolute bottom-10 left-10 -rotate-45" />
-                </div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-md w-full text-center relative z-10"
-                >
-                    <div className="mb-8">
-                        <motion.div
-                            initial={{ scale: 0.8, rotate: -10 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 100,
-                                damping: 10,
-                                delay: 0.2
-                            }}
-                            className="inline-block p-6 rounded-3xl bg-brand-dark/10 text-brand-dark mb-4"
-                        >
-                            <span className="text-8xl font-comfortaa font-bold">404</span>
-                        </motion.div>
-                    </div>
-
-                    <h1 className="text-3xl font-comfortaa font-bold text-slate-800 mb-4 tracking-tight">
-                        Página no encontrada
-                    </h1>
-
-                    <p className="text-lg text-slate-600 mb-10 leading-relaxed">
-                        Parece que la tierra bajo tus pies ha cambiado. Esta página no existe o ha sido movida.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link
-                            to="/"
-                            className="flex items-center justify-center gap-2 px-8 py-4 bg-brand-dark text-white rounded-xl font-semibold shadow-lg shadow-brand-dark/20 hover:bg-slate-800 transition-all active:scale-95"
-                        >
-                            <Home className="w-5 h-5" />
-                            Volver al Inicio
-                        </Link>
-
-                        <button
-                            onClick={() => window.history.back()}
-                            className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-semibold hover:bg-slate-50 transition-all active:scale-95"
-                        >
-                            <ArrowLeft className="w-5 h-5" />
-                            Regresar
-                        </button>
-                    </div>
-                </motion.div>
-            </main>
-
-            <Footer />
+        <div className="relative z-10 text-center">
+          <motion.h1 
+            className="text-8xl lg:text-[150px] font-bold text-brand-lime/20 font-outfit leading-none mb-4"
+            initial={{ scale: 0.8, rotate: -10, opacity: 0 }}
+            animate={{ scale: 1, rotate: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, damping: 10 }}
+          >
+            404
+          </motion.h1>
+          
+          <motion.h2 
+            className="text-3xl lg:text-4xl font-bold text-brand-dark mb-4 font-outfit"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Página no encontrada
+          </motion.h2>
+          
+          <motion.p 
+            className="text-warm-gray text-lg max-w-md mx-auto mb-10"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Lo sentimos, parece que la página que buscas no existe o ha sido movida.
+          </motion.p>
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link 
+              to="/"
+              className="inline-flex items-center gap-2 bg-brand-lime text-brand-dark px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 hover:shadow-brand-lime/20 transition-all duration-300 active:scale-95 text-lg"
+            >
+              Volver al inicio <HomeIcon size={20} />
+            </Link>
+          </motion.div>
         </div>
-    );
+      </main>
+
+      <Footer />
+    </div>
+  );
 };
 
 export default NotFound;

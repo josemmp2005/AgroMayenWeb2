@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, ArrowLeft, ExternalLink, Loader2, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -13,10 +13,21 @@ interface Sheet {
 
 const TechnicalSheets: React.FC = () => {
     const [sheets, setSheets] = useState<Sheet[]>([]);
-    const [filteredSheets, setFilteredSheets] = useState<Sheet[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const filteredSheets = useMemo(() => {
+        const query = debouncedSearchTerm.trim().toLowerCase();
+
+        if (!query) {
+            return sheets;
+        }
+
+        return sheets.filter((sheet) =>
+            sheet.name.toLowerCase().includes(query)
+        );
+    }, [debouncedSearchTerm, sheets]);
 
     useEffect(() => {
         fetchSheets();
@@ -29,22 +40,37 @@ const TechnicalSheets: React.FC = () => {
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
-    useEffect(() => {
-        setFilteredSheets(
-            sheets.filter(sheet =>
-                sheet.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-            )
-        );
-    }, [debouncedSearchTerm, sheets]);
-
     const fetchSheets = async () => {
         setIsLoading(true);
         try {
-            const response = await fetch('/.netlify/functions/sheets');
-            if (response.ok) {
-                const data = await response.json();
-                setSheets(data);
+            const isLocalHost = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
+            const endpoints = isLocalHost
+                ? [
+                    '/.netlify/functions/sheets',
+                    'http://127.0.0.1:8888/.netlify/functions/sheets',
+                    'http://localhost:8888/.netlify/functions/sheets'
+                ]
+                : ['/.netlify/functions/sheets'];
+
+            let lastError: unknown = null;
+
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+                    if (!response.ok) {
+                        lastError = new Error(`HTTP ${response.status} ${response.statusText}`);
+                        continue;
+                    }
+
+                    const data = await response.json();
+                    setSheets(Array.isArray(data) ? data : []);
+                    return;
+                } catch (error) {
+                    lastError = error;
+                }
             }
+
+            console.error('Failed to load sheets from all endpoints:', lastError);
         } catch (error) {
             console.error('Error fetching sheets:', error);
         } finally {
@@ -53,15 +79,15 @@ const TechnicalSheets: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-stone-100">
+        <div className="min-h-screen bg-[#f8f7f2]">
             <div className="container mx-auto px-6 py-12">
                 {/* Header Navigation */}
                 <div className="flex justify-between items-center mb-12">
                     <Link
                         to="/"
-                        className="inline-flex items-center gap-2 text-slate-600 hover:text-brand-lime transition-colors font-medium"
+                        className="inline-flex items-center gap-2 text-slate-600 hover:text-brand-dark transition-colors font-semibold"
                     >
-                        <ArrowLeft size={20} />
+                        <ArrowLeft size={18} />
                         Volver al inicio
                     </Link>
                 </div>
@@ -69,9 +95,9 @@ const TechnicalSheets: React.FC = () => {
                 {/* Page Title */}
                 <div className="text-center mb-10">
                     <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-dark to-brand-lime bg-clip-text text-transparent mb-4"
+                        className="text-4xl md:text-5xl font-bold text-brand-dark font-outfit mb-4 tracking-tight"
                     >
                         Fichas de Seguridad
                     </motion.h1>
@@ -79,10 +105,10 @@ const TechnicalSheets: React.FC = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.1 }}
-                        className="text-slate-500 text-lg max-w-2xl mx-auto"
+                        className="text-warm-gray text-base max-w-2xl mx-auto font-dm"
                     >
                         Consulta y descarga toda la documentación técnica de nuestros productos.
-                        Actualizado automáticamente desde nuestro sistema central.
+                        Actualizado de forma oficial para cumplir con la normativa vigente.
                     </motion.p>
                 </div>
 
@@ -93,8 +119,8 @@ const TechnicalSheets: React.FC = () => {
                     </div>
                     <input
                         type="text"
-                        className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:placeholder-slate-300 focus:ring-2 focus:ring-brand-lime/20 focus:border-brand-lime transition-all sm:text-sm shadow-sm"
-                        placeholder="Buscar por nombre..."
+                        className="block w-full pl-10 pr-3 py-3 border border-stone-200 rounded-xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:placeholder-slate-300 focus:ring-1 focus:ring-brand-dark focus:border-brand-dark transition-all sm:text-sm shadow-sm text-brand-dark font-medium"
+                        placeholder="Buscar producto..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -103,7 +129,7 @@ const TechnicalSheets: React.FC = () => {
                 {/* Loading State */}
                 {isLoading && (
                     <div className="flex justify-center py-20">
-                        <Loader2 className="w-10 h-10 animate-spin text-brand-lime" />
+                        <Loader2 className="w-8 h-8 animate-spin text-brand-dark" />
                     </div>
                 )}
 
@@ -119,27 +145,27 @@ const TechnicalSheets: React.FC = () => {
                                     exit={{ opacity: 0 }}
                                     transition={{ duration: 0.2 }}
                                     layout
-                                    className="bg-white rounded-2xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition-shadow group relative overflow-hidden"
+                                    className="bg-white rounded-2xl p-6 shadow-sm border border-stone-200/80 hover:shadow-md transition-shadow group relative overflow-hidden"
                                 >
-                                    <div className="absolute top-0 left-0 w-2 h-full bg-brand-lime group-hover:w-3 transition-all" />
-
+                                    <div className="absolute top-0 left-0 w-1.5 h-full bg-brand-leaf group-hover:bg-brand-dark transition-colors" />
+ 
                                     <div className="flex justify-between items-start mb-4 pl-3">
-                                        <div className="p-3 bg-slate-50 rounded-xl text-brand-dark group-hover:bg-brand-lime group-hover:text-brand-dark transition-colors">
-                                            <FileText size={28} />
+                                        <div className="p-3 bg-slate-50 border border-stone-200/60 rounded-xl text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
+                                            <FileText size={24} />
                                         </div>
                                     </div>
-
+ 
                                     <div className="pl-3">
-                                        <h3 className="text-xl font-bold text-slate-800 mb-2 line-clamp-2 min-h-[3.5rem]">{sheet.name}</h3>
-                                        <p className="text-sm text-slate-400 mb-6">Actualizado: {sheet.date}</p>
-
+                                        <h3 className="text-xl font-bold text-brand-dark mb-2 line-clamp-2 min-h-[3rem] tracking-tight">{sheet.name}</h3>
+                                        <p className="text-xs text-warm-gray mb-6">Actualizado: {sheet.date}</p>
+ 
                                         <a
                                             href={sheet.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-brand-lime font-bold hover:gap-3 transition-all group-hover:text-brand-dark"
+                                            className="inline-flex items-center gap-2 text-brand-leaf hover:text-brand-dark font-bold transition-all"
                                         >
-                                            Ver Documento <ExternalLink size={16} />
+                                            Ver Ficha Técnica <ExternalLink size={14} />
                                         </a>
                                     </div>
                                 </motion.div>
