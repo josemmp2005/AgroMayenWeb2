@@ -16,7 +16,6 @@ const TechnicalSheets: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [selected, setSelected] = useState<Sheet | null>(null);
 
     const filteredSheets = useMemo(() => {
         const query = debouncedSearchTerm.trim().toLowerCase();
@@ -48,8 +47,8 @@ const TechnicalSheets: React.FC = () => {
             const endpoints = isLocalHost
                 ? [
                     '/.netlify/functions/sheets',
-                    'http://127.0.0.1:3000/.netlify/functions/sheets',
-                    'http://localhost:3000/.netlify/functions/sheets'
+                    'http://127.0.0.1:8888/.netlify/functions/sheets',
+                    'http://localhost:8888/.netlify/functions/sheets'
                 ]
                 : ['/.netlify/functions/sheets'];
 
@@ -152,6 +151,7 @@ const TechnicalSheets: React.FC = () => {
  
                                     <div className="flex justify-between items-start mb-4 pl-3">
                                         <div className="p-3 bg-slate-50 border border-stone-200/60 rounded-xl text-brand-dark group-hover:bg-brand-dark group-hover:text-white transition-colors">
+                                            <FileText size={24} />
                                         </div>
                                     </div>
  
